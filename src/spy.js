@@ -13,11 +13,12 @@ const monitors = {};
 const scheduled = [];
 
 function configure(name, config = {}) {
-  if (typeof config.onlyActions === 'undefined') {
-    onlyActions[name] = mobx.isStrictModeEnabled && mobx.isStrictModeEnabled();
-  } else {
-    onlyActions[name] = config.onlyActions;
-  }
+  // if (typeof config.onlyActions === 'undefined') {
+  //   onlyActions[name] = mobx.isStrictModeEnabled && mobx.isStrictModeEnabled();
+  // } else {
+  //   onlyActions[name] = config.onlyActions;
+  // }
+  onlyActions[name] = config.onlyActions;
   if (config.filters) filters[name] = config.filters;
   if (config.global) {
     if (fallbackStoreName) throw Error('You\'ve already defined a global store');
@@ -26,7 +27,7 @@ function configure(name, config = {}) {
 }
 
 function init(store, config) {
-  const name = mobx.extras ? mobx.extras.getDebugName(store) : mobx.getDebugName(store);
+  const name = mobx.when ? mobx.getDebugName(store) : mobx.extras.getDebugName(store);
   configure(name, config);
   stores[name] = store;
 

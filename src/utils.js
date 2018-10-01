@@ -30,7 +30,7 @@ export function createAction(name, change) {
 
 export function getName(obj) {
   if (!obj || !mobx.isObservable(obj)) return '';
-  let r = mobx.extras ? mobx.extras.getDebugName(obj) : mobx.getDebugName(obj);
+  let r = mobx.when ? mobx.getDebugName(obj) : mobx.extras.getDebugName(obj);
 
   let end = r.indexOf('.');
   if (end === -1) end = undefined;
